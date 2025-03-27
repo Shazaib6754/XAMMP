@@ -1,18 +1,20 @@
 <?php
-// auteur: Vul hier je naam in
-// functie: verwijder een bier op basis van de id
-include 'functions.php';
+require_once('functions.php');
 
-// Haal bier uit de database
-if(isset($_GET['id'])){
-
-    // test of insert gelukt is
-    if(deleteRecord($_GET['id']) == true){
-        echo '<script>alert("Fietscode: ' . $_GET['id'] . ' is verwijderd")</script>';
-        echo "<script> location.replace('index.php'); </script>";
+if (isset($_GET['brouwcode'])) {
+    $brouwcode = $_GET['brouwcode'];
+    if (deleteRecord($brouwcode)) {
+        echo "<script>alert('Brouwer verwijderd!'); window.location.href='index.php';</script>";
     } else {
-        echo '<script>alert("Fiets is NIET verwijderd")</script>';
+        echo "<script>alert('Verwijderen mislukt!'); window.location.href='index.php';</script>";
     }
+} else {
+    echo "<script>alert('Geen brouwcode opgegeven!'); window.location.href='index.php';</script>";
 }
-?>
+if (isset($_GET['brouwcode'])) {
+    $brouwcode = $_GET['brouwcode'];
+} else {
+    die("Geen brouwcode opgegeven");
+}
 
+?>
